@@ -14,13 +14,13 @@ const server = http.createServer((req, res) => {
 
 mqttClient.on('connect', () => {
     console.log('Connecté au broker MQTT');
-    mqttClient.subscribe('classroom/+/telemetry', (err) => {
-        if (err) {
-            console.error('Erreur abonnement MQTT :', err);
-        } else {
-            console.log('Abonné à classroom/+/telemetry');
-        }
-    });
+    // mqttClient.subscribe('classroom/+/telemetry', (err) => {
+    //     if (err) {
+    //         console.error('Erreur abonnement MQTT :', err);
+    //     } else {
+    //         console.log('Abonné à classroom/+/telemetry');
+    //     }
+    // });
 });
 
 // Réception des messages MQTT
