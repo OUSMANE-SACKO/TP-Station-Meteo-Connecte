@@ -27,15 +27,27 @@ mqttClient.on('connect', () => {
 mqttClient.on('message', (topic, message) => {
     console.log(`MQTT [${topic}] : ${message.toString()}`);
 
-    // On envoie les messages reçus aux clients WebSocket connectés
-    wss.clients.forEach(client => {
-        if (client.readyState === WebSocket.OPEN) {
-            client.send(JSON.stringify({
-                topic,
-                message: message.toString()
-            }));
-        }
-    });
+    try {
+        // Parser le message MQTT comme JSON
+        const data = JSON.parse(message.toString());
+        
+        // On envoie les données reformatées aux clients WebSocket connectés
+        wss.clients.forEach(client => {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(JSON.stringify({
+                    type: 'sensor_data',
+                    data: {
+                        temperature: data.temperature || data.temp || 0,
+                        humidity: data.humidity || data.hum || 0,
+                        unit: data.unit || 'C',
+                        simulation: data.simulation !== undefined ? data.simulation : false
+                    }
+                }));
+            }
+        });
+    } catch (error) {
+        console.error('Erreur parsing message MQTT:', error);
+    }
 });
 
 // Création du serveur WebSocket lié au serveur HTTP

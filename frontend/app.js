@@ -5,7 +5,7 @@
 // Déterminer l'URL du serveur WebSocket
 const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
 const wsHost = window.location.hostname;
-const wsPort = 3001;
+const wsPort = 8080;
 const wsUrl = `${wsProtocol}//${wsHost}:${wsPort}`;
 
 let ws = null;
