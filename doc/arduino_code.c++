@@ -70,7 +70,7 @@ void loop() {
     digitalWrite(redLed, LOW);
   } 
   else {  
-    // Bouton appuyé → Fahrenheit
+    // Bouton appuyé maintenue → Fahrenheit
     Serial.print("Temperature = ");
     Serial.print(temperatureF);
     Serial.println(" °F");
