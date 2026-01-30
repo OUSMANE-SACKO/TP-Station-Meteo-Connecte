@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Station Météo Connectée</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- En-tête -->
+    <header>
+      <h1>🌡️ Station Météo Connectée</h1>
+      <p class="subtitle">HETIC WEB3 - Données en temps réel</p>
+    </header>
+
+    <!-- Statut de connexion -->
+    <div class="status-bar">
+      <div class="status-item">
+        <span class="status-label">Connexion WebSocket</span>
+        <div class="status-indicator" id="wsStatus">Déconnecté</div>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Mode ESP32</span>
+        <div id="simulationMode" class="simulation-badge">Mode simulation</div>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Dernière mise à jour</span>
+        <div id="lastUpdate">-- : --</div>
+      </div>
+    </div>
+
+    <!-- Affichage des données -->
+    <main class="dashboard">
+      <!-- Carte Température -->
+      <div class="sensor-card temperature-card">
+        <div class="card-icon">🌡️</div>
+        <div class="card-content">
+          <h2>Température</h2>
+          <div class="value" id="tempValue">-- °C</div>
+          <p class="unit-toggle">
+            <button class="unit-btn" onclick="changeUnit('C')" id="btnCelsius">°C</button>
+            <button class="unit-btn" onclick="changeUnit('F')" id="btnFahrenheit">°F</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Carte Humidité -->
+      <div class="sensor-card humidity-card">
+        <div class="card-icon">💧</div>
+        <div class="card-content">
+          <h2>Humidité</h2>
+          <div class="value" id="humidityValue">-- %</div>
+          <div class="humidity-bar">
+            <div class="humidity-fill" id="humidityBar" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Historique des données -->
+    <section class="history-section">
+      <h3>📊 Historique récent</h3>
+      <div class="data-table">
+        <div class="table-header">
+          <div class="col">Heure</div>
+          <div class="col">Température</div>
+          <div class="col">Humidité</div>
+          <div class="col">Unité</div>
+        </div>
+        <div id="dataTableBody" class="table-body">
+          <div class="empty-message">En attente de données...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Information de débuggage -->
+    <section class="debug-section">
+      <h3>🔧 Informations techniques</h3>
+      <div class="debug-info">
+        <p><strong>Broker MQTT:</strong> captain.dev0.pandor.cloud:1884</p>
+        <p><strong>Topic Data:</strong> station/meteo/data</p>
+        <p><strong>Topic Command:</strong> station/meteo/command</p>
+        <p><strong>Bridge WebSocket:</strong> <span id="wsUrl">ws://localhost:3001</span></p>
+        <p id="debugMessage" class="debug-message"></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
