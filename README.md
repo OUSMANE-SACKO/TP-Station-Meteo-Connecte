@@ -259,3 +259,10 @@ TP-Station-Meteo-Connecte/
 4. **Bilingual codebase** - Comments may be in French or English
 5. **ESP32 code is empty** - Needs full implementation
 6. **No build step for frontend** - Static HTML/CSS/JS files
+
+Membre du groupe
+OUARDI Ahmed-Amine
+Ousmane Sacko
+Ehoura Christ-Yvann
+JACQUET Oscar
+Antoine Mahassadi
