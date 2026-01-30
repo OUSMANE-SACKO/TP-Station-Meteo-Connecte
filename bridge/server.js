@@ -55,11 +55,13 @@ const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws) => {
     console.log('Nouveau client WebSocket connecté');
-    ws.send('Bienvenue sur le WebSocket !');
+    ws.send(JSON.stringify({
+        type: 'connection',
+        message: 'Connecté au bridge MQTT'
+    }));
 
     ws.on('message', (message) => {
         console.log('Message reçu du client :', message.toString());
-        ws.send(`Echo : ${message}`);
     });
 
     ws.on('close', () => {
